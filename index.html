@@ -1,0 +1,41 @@
+<head>
+	<meta charset="utf-8">
+	<title>Wikipedia search</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Quicksand" rel="stylesheet">
+</head>
+
+<body>
+	<form class="search-form">
+		<input id="search-input" class="search" type="search" placeholder="search Wikipedia" autofocus>
+		<ul class="suggestions">
+		</ul>
+		<ul class="empty">
+			<li id="random-article"><a href="https://en.wikipedia.org/wiki/Special:Random" target="blank">read a random article</a></li>
+		</ul>
+	</form>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(".search-form").on("keyup", function(e) {
+	e.preventDefault();
+
+	$.ajax("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + $("#search-input").val() + "&limit=50&format=json&callback=?", {
+		dataType: "jsonp"
+	}).done(function(response, status, request) {
+		console.log(response);
+
+		$(".suggestions").empty();
+
+		for (i = 0; i < response[1].length; i++) {
+			$(".suggestions").append("<li><h1><a href=" + response[3][i] + " target='blank'>" + response[1][i] + "</a></h1><p>" + response[2][i] + "</p></li>");
+		}
+
+	}).fail(function(request, status, error) {
+		alert("Uh oh! Something went wrong. " + status);
+	});
+
+});
+</script>
