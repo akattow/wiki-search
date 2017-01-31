@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
 	<title>Wikipedia search</title>
@@ -18,24 +19,34 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript">
+var timeout;
 
-$(".search-form").on("keyup", function(e) {
-	e.preventDefault();
+$("#search-input").on("keyup", function(e) {
+
+clearTimeout(timeout);
+timeout = setTimeout(function() {
 
 	$.ajax("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + $("#search-input").val() + "&limit=50&format=json&callback=?", {
 		dataType: "jsonp"
 	}).done(function(response, status, request) {
 		console.log(response);
 
-		$(".suggestions").empty();
+		var htmli = [];
 
 		for (i = 0; i < response[1].length; i++) {
-			$(".suggestions").append("<li><h1><a href=" + response[3][i] + " target='blank'>" + response[1][i] + "</a></h1><p>" + response[2][i] + "</p></li>");
+			htmli.push("<li><h1><a href='" + response[3][i] + "' target='blank'>" + response[1][i] + "</a></h1><p>" + response[2][i] + "</p></li>");
 		}
 
+		$(".suggestions").html(htmli.join(''));
+
 	}).fail(function(request, status, error) {
-		alert("Uh oh! Something went wrong. " + status);
+		console.error("Uh oh! Something went wrong.");
 	});
 
+}, 100);
+});
+
+$(".search-form").on("submit", function(e) {
+	e.preventDefault();
 });
 </script>

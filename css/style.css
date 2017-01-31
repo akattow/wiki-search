@@ -5,7 +5,7 @@
 }
 
 body {
-	background-color: #a0ffcc;
+	background-color: rgb(160,255,204);
 	color: white;
 	font: 100% 'Open Sans', sans-serif;
 }
@@ -21,7 +21,6 @@ input.search {
 	-webkit-appearance: none;
 	text-align: center;
 	width: 100%;
-	margin-bottom: 5vw;
 	border: .75em solid #F7F7F7;
 	padding: 1em;
 	border-radius: 20vw;
@@ -32,54 +31,63 @@ input.search {
 
 a {
 	text-decoration: none;
-	color: #1e6b94;
+	color: rgb(30,107,148);
 }
 
-a:visited {color: #2c37a1;}
+a:visited {color: rgb(44,55,161);}
 
-a:hover {color: #4560ac;}
+a:hover {color: rgb(69,96,172);}
 
 li {list-style-type: none;}
 
-#random-article {text-align: center;}
+#random-article {
+	text-align: center;
+	font-size: 1.25em;
+	margin-top: 5vw;
+}
+
+.suggestions {
+		perspective: 4000px;
+		margin: 5vw auto;
+}
+
+.suggestions p {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
 
 .suggestions li {
 	height: 125px;
 	background: white;
 	color: gray;
+	box-shadow: 0 2em 5em rgba(0, 0, 0, .3);
 	padding: 1em;
-	overflow: hidden;
-	position: relative;
 }
 
 .suggestions li:nth-child(even) {
 	margin-top: -5px;
 	transform: perspective(15em) rotateX(5deg);
-	background: -moz-linear-gradient(to top, #ffffff, #d6d6d6);
-	background: -o-linear-gradient(to top, #ffffff, #d6d6d6);
-	background: -webkit-linear-gradient(to top, #ffffff, #d6d6d6);
-	background: linear-gradient(to top, #ffffff, #d6d6d6);
-}
-
-.suggestions li:nth-child(even).fade {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	margin: 0;
-	background: -webkit-linear-gradient (to top, #ffffff, #d6d6d6);
-	background: linear-gradient (to top, #ffffff, #d6d6d6);
+	-webkit-transform: perspective(15em) rotateX(5deg);
+	-moz-transform: perspective(15em) rotateX(5deg);
+	background: -moz-linear-gradient(to top, rgb(255,255,255), rgb(230,230,230));
+	background: -o-linear-gradient(to top, rgb(255,255,255), rgb(230,230,230));
+	background: -webkit-linear-gradient(to top, rgb(255,255,255), rgb(230,230,230));
+	background: linear-gradient(to top, rgb(255,255,255), rgb(230,230,230));
 }
 
 .suggestions li:nth-child(odd) {
+	margin-top: 2px;
 	transform: perspective(15em) rotateX(-5deg);
-	background: -moz-linear-gradient(to bottom, #ffffff, #d6d6d6);
-	background: -o-linear-gradient(to bottom, #ffffff, #d6d6d6);
-	background: -webkit-linear-gradient(to bottom, #ffffff, #d6d6d6);
-	background: linear-gradient(to bottom, #ffffff, #d6d6d6);
+	-webkit-transform: perspective(15em) rotateX(-5deg);
+	-moz-transform: perspective(15em) rotateX(-5deg);
+	background: -moz-linear-gradient(to bottom, rgb(255,255,255), rgb(230,230,230));
+	background: -o-linear-gradient(to bottom, rgb(255,255,255), rgb(230,230,230));
+	background: -webkit-linear-gradient(to bottom, rgb(255,255,255), rgb(230,230,230));
+	background: linear-gradient(to bottom, rgb(255,255,255), rgb(230,230,230));
 }
 
 @media screen and (max-width: 600px) {
-	.search-form {max-width: 300px;
-	}
+	.search-form {max-width: 300px;}
 }
